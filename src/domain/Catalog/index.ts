@@ -39,9 +39,9 @@ class Catalog extends ProductExtraction {
 
             console.log("=======>> Products extracted: ", products);
 
-            await this.catalogRepository.bulkCreate(products);
-
-            console.log("=======>> Saved sucessfully.");
+            // await this.catalogRepository.bulkCreate(products);
+            //
+            // console.log("=======>> Saved sucessfully.");
         } catch (err: any) {
             console.error("Error extracting products. Error: ", err);
         } finally {
@@ -49,7 +49,7 @@ class Catalog extends ProductExtraction {
         }
     }
 
-    protected async extractProductData(page: Page, extractProductInfo: ExtractProductInfoI): Promise<any> {
+    override async extractProductData(page: Page, extractProductInfo: ExtractProductInfoI): Promise<any> {
         try {
             const { site, baseUrl, type, nameRegex, ...productSelectors } = extractProductInfo;
             let resultObj: any = {

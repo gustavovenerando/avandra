@@ -5,7 +5,7 @@ import Catalog from "./domain/Catalog";
 import Price from "./domain/Price";
 
 (async () => {
-    await container.get(MySqlConnection).inicialize();
-    container.get(Catalog).extract();
+    // await container.get(MySqlConnection).inicialize();
+    // container.get(Catalog).extract();
     container.get(Price).extract();
 })();

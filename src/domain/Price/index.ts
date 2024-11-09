@@ -39,9 +39,9 @@ class Price extends ProductExtraction {
 
             console.log("=======>> Products extracted: ", prices);
 
-            await this.priceRepository.bulkCreate(prices);
-
-            console.log("=======>> Saved sucessfully.");
+            // await this.priceRepository.bulkCreate(prices);
+            //
+            // console.log("=======>> Saved sucessfully.");
         } catch (err: any) {
             console.error("Error extracting products. Error: ", err);
         } finally {
@@ -49,7 +49,7 @@ class Price extends ProductExtraction {
         }
     }
 
-    protected async extractProductData(page: Page, extractProductInfo: ExtractProductInfoI): Promise<any> {
+    override async extractProductData(page: Page, extractProductInfo: ExtractProductInfoI): Promise<any> {
         try {
             const { 
                 site,
