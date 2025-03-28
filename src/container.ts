@@ -6,6 +6,7 @@ import Puppeteer from "./domain/Puppeteer";
 import MySqlFactory from "./infra/database/mysql/factory";
 import MySqlConnection from "./infra/database/mysql/connection";
 import CatalogModel from "./infra/database/mysql/model/Catalog";
+import PriceModel from "./infra/database/mysql/model/Price";
 import CatalogRepository from "./infra/database/mysql/repository/Catalog";
 import ProductExtraction from "./domain/ProductExtraction";
 import Catalog from "./domain/Catalog";
@@ -19,6 +20,7 @@ container.bind(MySqlConnection).toSelf().inSingletonScope();
 
 //Model
 container.bind(CatalogModel).toSelf().inSingletonScope();
+container.bind(PriceModel).toSelf().inSingletonScope();
 
 //Repository
 container.bind(CatalogRepository).toSelf();

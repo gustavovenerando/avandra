@@ -22,7 +22,6 @@ class Price {
             {
                 url: {
                     type: DataTypes.STRING,
-                    unique: true
                 },
                 pix: {
                     type: DataTypes.STRING,

@@ -1,21 +1,27 @@
 import { inject, injectable } from "inversify";
 import MySqlConnection from "../../connection";
 import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import PriceModel from "../Price";
 
 @injectable()
 class Catalog {
     private readonly conn: Sequelize | undefined;
 
     private model: ModelStatic<Model> | undefined;
-    
+
     constructor(
-        @inject(MySqlConnection) private mySqlConn: MySqlConnection
+        @inject(MySqlConnection) private mySqlConn: MySqlConnection,
+        @inject(PriceModel) private priceModel:PriceModel 
     ) { 
         this.conn = this.mySqlConn.mainConn;
     }
 
     private async create() {
         if (!this.conn) throw new Error("MySql database not inicialized. Not possible to create a model.");
+
+        const priceModelInstance = await this.priceModel.getModel();
+
+        if(!priceModelInstance) throw new Error("Could not get price model instance.");
 
         const model = this.conn.define(
             'Catalog',
@@ -50,6 +56,8 @@ class Catalog {
                 freezeTableName: true
             }
         );
+
+        model.hasMany(priceModelInstance, { sourceKey: 'url', foreignKey: 'catalogUrl'})
 
         await model.sync();
 
